@@ -16,7 +16,7 @@ function Header() {
          
             <iframe src="https://giphy.com/embed/8zjxfpuutpJFRnlM2h"
              width="200" height="120" frameBorder="0" 
-             class="giphy-embed" allowFullScreen></iframe><p>
+             className="giphy-embed" allowFullScreen></iframe><p>
            </p>
 
 
