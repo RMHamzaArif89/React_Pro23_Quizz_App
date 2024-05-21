@@ -1,13 +1,14 @@
-import React, { useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import questions from '../questions'
 import './css/quiz.css'
+import QuizzTimer from './QuizzTimer'
 
 function Quiz() {
     let [answersId, setAnswersId] = useState([])
     const currentQuestionId = answersId.length;
+// console.log(currentQuestionId)
 
-
-    if (currentQuestionId > questions.length - 1) {
+      if (currentQuestionId > questions.length - 1) {
         return <div className="quizz_con_end">
             <img src="/images/trophy.gif" className='quizz_end_img' alt="" />
             <h1 className='quizz_end'>Your score is {answersId.length}</h1>
@@ -22,17 +23,19 @@ function Quiz() {
      sortedAnswers.sort(() => Math.random() - 0.5)
 
   
-console.log(currentQuestionId)
-console.log(answersId)
-    let handleChoose=(answer)=>{
+
+    let handleChoose=useCallback((answer)=>{
         setAnswersId([...answersId, answer])
-    }
+    })
+
+    const skipAnswers=useCallback(()=>{handleChoose(null),[handleChoose]})
 
 
     
     return (
         <div className='quizz'>
             <div className="quizz_con">
+                <QuizzTimer totalTime={10000} timeout={()=>skipAnswers()}/>
 
                 <div className="quizz_question">{questions[currentQuestionId].text}</div>
                 {sortedAnswers.map((answer, id) => {
