@@ -5,7 +5,10 @@ function QuizzTimer({totalTime,timeout}) {
     let[remainingTime,setRemainingTime]=useState(totalTime)
 
     useEffect(()=>{
-        setTimeout(timeout,totalTime)
+       const timerInterval= setTimeout(timeout,totalTime)
+
+        return()=>{clearTimeout(timerInterval)}
+
     },[totalTime,timeout])
 
     
@@ -17,9 +20,9 @@ function QuizzTimer({totalTime,timeout}) {
            return()=>{ clearInterval(timer)}
 
           },[])
-if(remainingTime<0){
-      setRemainingTime(totalTime)
-    }
+// if(remainingTime<0){
+    //   setRemainingTime(totalTime)
+    // }
       
     
 
